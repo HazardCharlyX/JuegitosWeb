@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 Fidget Spinner Pro Max 3000 - Juegos Shitpost Web</title>
+    <meta name="description" content="El Fidget Spinner definitivo para la web con físicas de inercia realistas, sonido dinámico procedimental, skins absurdas y mejoras sin sentido.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌀</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background dynamic canvas for sparks, shockwaves, smoke -->
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="game-header">
+            <a href="../../index.html" class="back-link">
+                <span>◀</span> Menú Arcade
+            </a>
+            <div class="title-area">
+                <h1>FIDGET SPINNER PRO MAX 3000</h1>
+                <p class="subtitle">Simulador de Inercia & Destrucción de Rodamientos</p>
+            </div>
+            <div class="header-actions">
+                <button id="mute-btn" class="icon-btn active" title="Alternar Sonido">🔊 Sonido ON</button>
+                <button id="rave-btn" class="icon-btn" title="Modo Rave / Fiesta">🌈 Modo Rave</button>
+            </div>
+        </header>
+
+        <!-- Main Arena Grid -->
+        <main class="main-arena">
+            <!-- Left HUD: Telemetry & Records -->
+            <aside class="hud-panel telemetry-panel">
+                <h2 class="panel-title">📊 Telemetría</h2>
+                
+                <div class="stat-box">
+                    <div class="stat-label">Velocidad Actual</div>
+                    <div class="stat-value glow-pink"><span id="rpm-value">0</span> <span style="font-size: 1rem; color: var(--text-muted);">RPM</span></div>
+                    
+                    <div class="gauge-container">
+                        <div id="rpm-gauge-fill" class="gauge-fill"></div>
+                    </div>
+                    
+                    <div id="speed-status" class="speed-status-text">
+                        💤 Estado: Parado. ¡Gírame con ganas!
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-label">Récord de Velocidad</div>
+                    <div class="stat-value"><span id="max-rpm-value">0</span> <span style="font-size: 0.9rem; color: var(--text-muted);">RPM</span></div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-label">Giros Acumulados</div>
+                    <div class="stat-value glow-green" id="total-spins-value">0</div>
+                </div>
+            </aside>
+
+            <!-- Center: The Spinner Canvas/Stage -->
+            <section class="spinner-stage">
+                <div id="spinner-container" class="spinner-container">
+                    <div id="spinner" class="spinner-wrapper">
+                        <!-- SVG Skin injected by game.js -->
+                    </div>
+                </div>
+
+                <div class="stage-hint">
+                    <span>👆</span> <b>Arrastra o lanza (flick)</b> con el ratón o desliza con el dedo para girar
+                </div>
+            </section>
+
+            <!-- Right HUD: Gadgets & Absurd Upgrades -->
+            <aside class="hud-panel gadgets-panel">
+                <h2 class="panel-title">🛠️ Mejoras & Gadgets</h2>
+                
+                <div class="gadget-grid">
+                    <button id="blowBtn" class="gadget-btn" style="display:none;"></button> <!-- Fallback -->
+                    <button id="blow-btn" class="gadget-btn" title="Atajo: Espacio">
+                        <span>💨 Soplido Cósmico</span>
+                        <span class="badge">+900 RPM</span>
+                    </button>
+
+                    <button id="wd40-btn" class="gadget-btn" title="Atajo: W">
+                        <span>🧴 Echar WD-40</span>
+                        <span class="badge">0% Fricción</span>
+                    </button>
+
+                    <button id="turbo-btn" class="gadget-btn" title="Atajo: T">
+                        <span>🚀 Activar Turbo V8</span>
+                        <span class="badge">Auto-Giro</span>
+                    </button>
+
+                    <button id="brake-btn" class="gadget-btn brake-btn" title="Mantén pulsado o pulsa B">
+                        <span>🛑 Frenar con el Dedo</span>
+                        <span class="badge" style="background:#ef4444;">¡Quema!</span>
+                    </button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Bottom: Skins Selector Drawer -->
+        <section class="skins-section">
+            <h3 class="skins-title">🎨 Elige tu Modelo de Fidget</h3>
+            <div id="skin-selector" class="skins-list">
+                <!-- Buttons injected dynamically by game.js -->
+            </div>
+        </section>
+
+        <!-- Footer Shortcuts -->
+        <footer class="footer-hints">
+            Atajos de teclado: 
+            <span class="key-badge">Espacio</span> Soplar &bull; 
+            <span class="key-badge">W</span> WD-40 &bull; 
+            <span class="key-badge">T</span> Turbo &bull; 
+            <span class="key-badge">B</span> Frenar &bull; 
+            <span class="key-badge">M</span> Mutear &bull; 
+            <span class="key-badge">R</span> Rave
+        </footer>
+    </div>
+
+    <!-- Floating Meme Toast -->
+    <div id="meme-banner" class="meme-banner">¡Bienvenido a Fidget Spinner 3000!</div>
+
+    <!-- Scripts in order -->
+    <script src="audio.js"></script>
+    <script src="physics.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

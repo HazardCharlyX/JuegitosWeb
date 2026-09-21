@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐉 Pokémon Edición Esmeralda (GBA Online) - Juegos Shitpost Web</title>
+    <meta name="description" content="Juega a Pokémon Edición Esmeralda en Español en tu navegador. Emulador online de Game Boy Advance en JavaScript puro con modo turbo y guardado.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐉</text></svg>">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- IodineGBA Core Scripts -->
+    <script src="IodineGBA/includes/TypedArrayShim.js"></script>
+    <script src="IodineGBA/core/Cartridge.js"></script>
+    <script src="IodineGBA/core/DMA.js"></script>
+    <script src="IodineGBA/core/Emulator.js"></script>
+    <script src="IodineGBA/core/Graphics.js"></script>
+    <script src="IodineGBA/core/RunLoop.js"></script>
+    <script src="IodineGBA/core/Memory.js"></script>
+    <script src="IodineGBA/core/IRQ.js"></script>
+    <script src="IodineGBA/core/JoyPad.js"></script>
+    <script src="IodineGBA/core/Serial.js"></script>
+    <script src="IodineGBA/core/Sound.js"></script>
+    <script src="IodineGBA/core/Timer.js"></script>
+    <script src="IodineGBA/core/Wait.js"></script>
+    <script src="IodineGBA/core/CPU.js"></script>
+    <script src="IodineGBA/core/Saves.js"></script>
+    <script src="IodineGBA/core/sound/FIFO.js"></script>
+    <script src="IodineGBA/core/sound/Channel1.js"></script>
+    <script src="IodineGBA/core/sound/Channel2.js"></script>
+    <script src="IodineGBA/core/sound/Channel3.js"></script>
+    <script src="IodineGBA/core/sound/Channel4.js"></script>
+    <script src="IodineGBA/core/CPU/ARM.js"></script>
+    <script src="IodineGBA/core/CPU/THUMB.js"></script>
+    <script src="IodineGBA/core/CPU/CPSR.js"></script>
+    <script src="IodineGBA/core/graphics/Renderer.js"></script>
+    <script src="IodineGBA/core/graphics/RendererProxy.js"></script>
+    <script src="IodineGBA/core/graphics/BGTEXT.js"></script>
+    <script src="IodineGBA/core/graphics/BG2FrameBuffer.js"></script>
+    <script src="IodineGBA/core/graphics/BGMatrix.js"></script>
+    <script src="IodineGBA/core/graphics/AffineBG.js"></script>
+    <script src="IodineGBA/core/graphics/ColorEffects.js"></script>
+    <script src="IodineGBA/core/graphics/Mosaic.js"></script>
+    <script src="IodineGBA/core/graphics/OBJ.js"></script>
+    <script src="IodineGBA/core/graphics/OBJWindow.js"></script>
+    <script src="IodineGBA/core/graphics/Window.js"></script>
+    <script src="IodineGBA/core/graphics/Compositor.js"></script>
+    <script src="IodineGBA/core/memory/DMA0.js"></script>
+    <script src="IodineGBA/core/memory/DMA1.js"></script>
+    <script src="IodineGBA/core/memory/DMA2.js"></script>
+    <script src="IodineGBA/core/memory/DMA3.js"></script>
+    <script src="IodineGBA/core/cartridge/SaveDeterminer.js"></script>
+    <script src="IodineGBA/core/cartridge/SRAM.js"></script>
+    <script src="IodineGBA/core/cartridge/FLASH.js"></script>
+    <script src="IodineGBA/core/cartridge/EEPROM.js"></script>
+
+    <!-- Audio & Glue Scripts -->
+    <script src="user_scripts/XAudioJS/resampler.js"></script>
+    <script src="user_scripts/XAudioJS/XAudioServer.js"></script>
+    <script src="user_scripts/base64.js"></script>
+    <script src="user_scripts/IodineGBAGraphicsGlueCode.js"></script>
+    <script src="user_scripts/IodineGBAAudioGlueCode.js"></script>
+
+    <!-- UI Controller -->
+    <script src="gba_ui.js"></script>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="gba-header">
+        <a href="../../index.html" class="back-link">
+            <span>◀</span> Menú Arcade
+        </a>
+        <div class="title-box">
+            <h1>POKÉMON EDICIÓN ESMERALDA</h1>
+            <p>Game Boy Advance • 100% Castellano • Emulador Online</p>
+        </div>
+        <div class="header-badges">
+            <span class="badge-tag" id="fps-indicator">60 FPS</span>
+            <span class="badge-tag" id="speed-indicator">100%</span>
+        </div>
+    </header>
+
+    <!-- Toolbar Controls -->
+    <nav class="toolbar">
+        <button id="turbo-btn" class="tool-btn" title="Atajo: Espacio">
+            <span>⚡</span> Modo Turbo
+        </button>
+        <button id="pause-btn" class="tool-btn" title="Pausar el juego">
+            <span>⏸️</span> Pausar
+        </button>
+        <button id="mute-btn" class="tool-btn" title="Alternar audio">
+            <span>🔊</span> Sonido ON
+        </button>
+        <button id="export-save-btn" class="tool-btn" title="Descargar archivo .sav para mGBA o VBA">
+            <span>💾</span> Exportar .SAV
+        </button>
+        <button id="import-save-btn" class="tool-btn" title="Importar archivo .sav desde tu PC">
+            <span>📥</span> Importar .SAV
+        </button>
+        <button id="load-rom-btn" class="tool-btn" title="Cargar otra ROM .gba desde tu equipo">
+            <span>📁</span> Cargar otra ROM
+        </button>
+        <button id="fullscreen-btn" class="tool-btn" title="Jugar en pantalla completa">
+            <span>🖥️</span> Pantalla Completa
+        </button>
+
+        <!-- Hidden inputs -->
+        <input type="file" id="save-file-input" accept=".sav" style="display: none;">
+        <input type="file" id="rom-file-input" accept=".gba,.bin" style="display: none;">
+    </nav>
+
+    <!-- Main Handheld Console Shell -->
+    <main class="gba-wrapper">
+        <div class="gba-chassis">
+            <!-- Shoulder Bumpers L and R -->
+            <div class="shoulder-container">
+                <button class="shoulder-btn" data-btn="9" title="Botón L (Q)">L</button>
+                <button class="shoulder-btn" data-btn="8" title="Botón R (E)">R</button>
+            </div>
+
+            <!-- Chassis Header -->
+            <div class="console-top">
+                <div class="power-indicator">
+                    <div id="power-led" class="power-led on"></div>
+                    <span>POWER</span>
+                </div>
+                <div class="hologram-badge">RAYQUAZA EDITION</div>
+            </div>
+
+            <!-- Chassis Body: D-Pad, Screen, A/B Buttons -->
+            <div class="console-body">
+                <!-- Left: D-Pad -->
+                <div class="dpad-cluster">
+                    <div class="dpad">
+                        <button class="dpad-btn dpad-up" data-btn="6" title="Arriba (W / ↑)">▲</button>
+                        <button class="dpad-btn dpad-down" data-btn="7" title="Abajo (S / ↓)">▼</button>
+                        <button class="dpad-btn dpad-left" data-btn="5" title="Izquierda (A / ←)">◀</button>
+                        <button class="dpad-btn dpad-right" data-btn="4" title="Derecha (D / →)">▶</button>
+                        <div class="dpad-center"></div>
+                    </div>
+                </div>
+
+                <!-- Center: Screen Frame -->
+                <div class="screen-housing">
+                    <div class="screen-viewport">
+                        <canvas id="emulator_target" width="240" height="160"></canvas>
+                        <div class="screen-glare"></div>
+
+                        <!-- Interactive Loading Progress Overlay -->
+                        <div id="loading-overlay" class="loading-overlay">
+                            <div class="loading-spinner">🐉</div>
+                            <div id="loading-text" class="loading-text">Cargando Pokémon Esmeralda...</div>
+                            <div class="loading-bar-bg">
+                                <div id="loading-progress" class="loading-bar-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-brand">GAME BOY <span>ADVANCE</span></div>
+                </div>
+
+                <!-- Right: A and B Buttons -->
+                <div class="action-cluster">
+                    <div class="action-tray">
+                        <button class="btn-round" data-btn="1" title="Botón B (Z / K)">B</button>
+                        <button class="btn-round btn-a" data-btn="0" title="Botón A (X / J)">A</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chassis Bottom: Select & Start Buttons + Speaker Holes -->
+            <div class="console-bottom">
+                <div class="speaker-grille">
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                </div>
+
+                <div class="start-select-tray">
+                    <div class="pill-btn-wrapper">
+                        <button class="btn-pill" data-btn="2" title="Select (Shift)"></button>
+                        <span class="pill-label">SELECT</span>
+                    </div>
+                    <div class="pill-btn-wrapper">
+                        <button class="btn-pill" data-btn="3" title="Start (Enter)"></button>
+                        <span class="pill-label">START</span>
+                    </div>
+                </div>
+
+                <div class="speaker-grille">
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                    <div class="speaker-hole"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Keyboard Shortcuts Legend -->
+    <footer class="key-hints">
+        Controles Teclado: 
+        <span class="key-badge">WASD</span> o <span class="key-badge">Flechas</span> Moverse &bull; 
+        <span class="key-badge">X</span> / <span class="key-badge">J</span> Botón A &bull; 
+        <span class="key-badge">Z</span> / <span class="key-badge">K</span> Botón B &bull; 
+        <span class="key-badge">Enter</span> Start &bull; 
+        <span class="key-badge">Shift</span> Select &bull; 
+        <span class="key-badge">Q</span> / <span class="key-badge">E</span> L/R &bull; 
+        <span class="key-badge">Espacio</span> Turbo
+    </footer>
+
+    <!-- Toast Notice -->
+    <div id="status-toast" class="status-toast"></div>
+</body>
+</html>

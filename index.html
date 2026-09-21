@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕹️ Colección de Juegos Shitpost Web - HTML, CSS & JavaScript</title>
+    <meta name="description" content="Recopilación de juegos web cómicos y adictivos creados con Vanilla HTML5, CSS3 y JavaScript. Juega gratis a Fidget Spinner Pro Max 3000 con físicas y sonido.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕹️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- CRT TV Scanlines Overlay (Toggleable) -->
+    <div id="crt-overlay" class="crt-overlay"></div>
+
+    <div class="hub-wrapper">
+        <!-- Top Toolbar -->
+        <div class="top-bar">
+            <button id="crt-toggle" class="toggle-btn">📺 Efecto CRT: OFF</button>
+        </div>
+
+        <!-- Hero Header -->
+        <header class="hub-header">
+            <div class="hero-tag">EDICIÓN DEFINITIVA 100% VANILLA</div>
+            <h1 class="hub-title">JUEGOS SHITPOST WEB</h1>
+            <p class="hub-desc">
+                Una antología de minijuegos experimentales, absurdos y altamente adictivos desarrollados sin dependencias externas pesadas, puramente con la fuerza bruta de HTML, CSS y JavaScript moderno.
+            </p>
+        </header>
+
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stat-item">
+                <div class="num" style="color: var(--neon-cyan);">2</div>
+                <div class="label">Juegos Disponibles</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color: var(--neon-pink);">0</div>
+                <div class="label">Frameworks Usados</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color: var(--neon-green);">100%</div>
+                <div class="label">Poder Vanilla</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color: var(--neon-yellow);">∞</div>
+                <div class="label">Horas Perdidas</div>
+            </div>
+        </section>
+
+        <!-- Games Catalog Section -->
+        <section>
+            <h2 class="games-section-title">
+                <span>🔥</span> Catálogo de Minijuegos
+            </h2>
+
+            <div class="games-grid">
+                <!-- Game 1: Fidget Spinner (PLAYABLE NOW) -->
+                <article class="game-card featured">
+                    <div>
+                        <div class="card-top">
+                            <span class="card-icon">🌀</span>
+                            <span class="badge-status live">🟢 JUGABLE AHORA</span>
+                        </div>
+                        <h3 class="card-title">Fidget Spinner Pro Max 3000</h3>
+                        <p class="card-desc">
+                            Simulador físico de inercia rotacional con sonido dinámico procedimental por Web Audio API. Haz flick a miles de RPM, báñalo en WD-40 para anular la fricción, activa el motor V8 turbo y desbloquea el Pollo Chillón o el Doge Spinner.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Físicas de Inercia</span>
+                            <span class="tag">Audio Sintético</span>
+                            <span class="tag">Skins Absurdas</span>
+                            <span class="tag">Mach 1</span>
+                        </div>
+                    </div>
+                    <a href="games/fidget-spinner/index.html" class="play-btn active-play">
+                        <span>🚀</span> ¡Jugar Ahora!
+                    </a>
+                </article>
+
+                <!-- Game 2: Pokemon Emerald GBA (PLAYABLE NOW) -->
+                <article class="game-card featured">
+                    <div>
+                        <div class="card-top">
+                            <span class="card-icon">🐉</span>
+                            <span class="badge-status live">🟢 JUGABLE AHORA</span>
+                        </div>
+                        <h3 class="card-title">Pokémon Edición Esmeralda (GBA)</h3>
+                        <p class="card-desc">
+                            Emulador completo de Game Boy Advance en JavaScript puro. Revive la legendaria aventura en la región de Hoenn en 100% castellano. Incluye chasis interactivo Rayquaza Edition, modo turbo para subir de nivel a 3x, exportación de partidas .SAV y controles táctiles o de teclado.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">GBA 32-bit</span>
+                            <span class="tag">100% Español</span>
+                            <span class="tag">Modo Turbo 3x</span>
+                            <span class="tag">Exportar .SAV</span>
+                        </div>
+                    </div>
+                    <a href="games/pokemon-emerald/index.html" class="play-btn active-play">
+                        <span>🚀</span> ¡Jugar Ahora!
+                    </a>
+                </article>
+
+                <!-- Teaser Game 3: Drunk Driving Straight Line -->
+                <article class="game-card locked">
+                    <div>
+                        <div class="card-top">
+                            <span class="card-icon">🚗</span>
+                            <span class="badge-status locked">🔒 PRÓXIMAMENTE</span>
+                        </div>
+                        <h3 class="card-title">Conducir Recto a las 3 AM</h3>
+                        <p class="card-desc">
+                            El coche tiene la dirección desalineada y el asfalto está resbaladizo. Tu única misión es no salirte de una carretera perfectamente recta. Imposible.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Paciencia Cero</span>
+                            <span class="tag">Rage Game</span>
+                        </div>
+                    </div>
+                    <button class="play-btn disabled" disabled>
+                        <span>🔒</span> En Desarrollo
+                    </button>
+                </article>
+
+                <!-- Teaser Game 4: Don't Break The Egg -->
+                <article class="game-card locked">
+                    <div>
+                        <div class="card-top">
+                            <span class="card-icon">🥚</span>
+                            <span class="badge-status locked">🔒 PRÓXIMAMENTE</span>
+                        </div>
+                        <h3 class="card-title">No Rompas el Huevo</h3>
+                        <p class="card-desc">
+                            Hay un huevo en pantalla. Te dice explícitamente que no lo toques. El 99.8% de los humanos lo tocan en menos de 3 segundos.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Psicología Inversa</span>
+                            <span class="tag">Yemas Voladoras</span>
+                        </div>
+                    </div>
+                    <button class="play-btn disabled" disabled>
+                        <span>🔒</span> En Desarrollo
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="hub-footer">
+            <p>Hecho con ❤️, HTML5, CSS3 y JavaScript para el deleite shitpost universal.</p>
+        </footer>
+    </div>
+
+    <!-- Hub Toast -->
+    <div id="hub-toast" class="hub-toast"></div>
+
+    <script src="hub.js"></script>
+</body>
+</html>

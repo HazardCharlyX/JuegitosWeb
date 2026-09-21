@@ -1,0 +1,633 @@
+/* style.css - Game Boy Advance Emerald Edition Styling */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+    --bg-dark: #060810;
+    --gba-shell-1: #064e3b;
+    --gba-shell-2: #047857;
+    --gba-shell-3: #022c22;
+    --bezel-dark: #0f172a;
+    --bezel-gray: #334155;
+    --dpad-color: #1e293b;
+    --button-a: #10b981;
+    --button-b: #059669;
+    --neon-green: #22c55e;
+    --neon-emerald: #10b981;
+    --neon-gold: #facc15;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --font-heading: 'Outfit', sans-serif;
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: 
+        radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(234, 179, 8, 0.08) 0%, transparent 50%);
+    overflow-x: hidden;
+}
+
+/* Header */
+.gba-header {
+    width: 100%;
+    max-width: 1050px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--neon-emerald);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 999px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    transform: translateX(-3px);
+}
+
+.title-box {
+    text-align: center;
+}
+
+.title-box h1 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #ffffff 10%, #34d399 50%, #059669 85%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-box p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.header-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge-tag {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+}
+
+/* Control Toolbar */
+.toolbar {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+}
+
+.tool-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-main);
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--neon-emerald);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.tool-btn.active {
+    background: rgba(234, 179, 8, 0.2);
+    border-color: var(--neon-gold);
+    color: var(--neon-gold);
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
+}
+
+/* GBA Console Chassis Container */
+.gba-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.gba-chassis {
+    width: 100%;
+    max-width: 820px;
+    background: linear-gradient(160deg, #065f46 0%, #047857 50%, #064e3b 100%);
+    border-radius: 40px 40px 55px 55px;
+    padding: 1.5rem 2rem 2.2rem 2rem;
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        inset 0 2px 5px rgba(255, 255, 255, 0.35),
+        inset 0 -4px 10px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(16, 185, 129, 0.2);
+    border: 3px solid rgba(52, 211, 153, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* L and R Shoulder Buttons */
+.shoulder-container {
+    position: absolute;
+    top: -14px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.shoulder-btn {
+    pointer-events: auto;
+    width: 110px;
+    height: 22px;
+    background: linear-gradient(to bottom, #94a3b8, #475569);
+    border-radius: 12px 12px 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #f1f5f9;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.1s;
+}
+
+.shoulder-btn:active, .shoulder-btn.pressed {
+    transform: translateY(4px);
+    background: #334155;
+}
+
+/* Console Top Bar inside shell */
+.console-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0 1rem;
+}
+
+.power-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.5px;
+}
+
+.power-led {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+    transition: all 0.3s;
+}
+
+.power-led.turbo {
+    background: var(--neon-gold);
+    box-shadow: 0 0 12px var(--neon-gold);
+    animation: ledPulse 0.4s infinite alternate;
+}
+
+.power-led.paused {
+    background: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
+}
+
+@keyframes ledPulse {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+.hologram-badge {
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    color: #fef08a;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(254, 240, 138, 0.3);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    text-shadow: 0 0 8px rgba(254, 240, 138, 0.6);
+}
+
+/* Middle Section: Controls + Screen */
+.console-body {
+    display: grid;
+    grid-template-columns: 140px 1fr 140px;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .console-body {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Screen Bezel & Canvas */
+.screen-housing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #090d16;
+    border-radius: 14px;
+    padding: 0.85rem 1rem 0.75rem 1rem;
+    border: 3px solid #1e293b;
+    box-shadow: 
+        inset 0 4px 12px rgba(0, 0, 0, 0.9),
+        0 4px 10px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.screen-viewport {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 3 / 2;
+    background: #000000;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+#emulator_target {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* Glass Reflection Layer */
+.screen-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 60%);
+    pointer-events: none;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 25, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 10;
+}
+
+.loading-spinner {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.loading-bar-bg {
+    width: 80%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.loading-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10b981, #facc15);
+    border-radius: 999px;
+    transition: width 0.1s linear;
+}
+
+.screen-brand {
+    font-family: var(--font-pixel);
+    font-size: 0.75rem;
+    color: #94a3b8;
+    letter-spacing: 2px;
+    margin-top: 0.6rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.screen-brand span {
+    color: #38bdf8;
+}
+
+/* Left Controls: D-PAD */
+.dpad-cluster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dpad {
+    width: 110px;
+    height: 110px;
+    position: relative;
+}
+
+.dpad-btn {
+    position: absolute;
+    background: linear-gradient(145deg, #334155, #1e293b);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: bold;
+    touch-action: none;
+}
+
+.dpad-btn:active, .dpad-btn.pressed {
+    background: #0f172a;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    transform: scale(0.96);
+}
+
+.dpad-up {
+    top: 0;
+    left: 36px;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px 6px 0 0;
+}
+
+.dpad-down {
+    bottom: 0;
+    left: 36px;
+    width: 38px;
+    height: 38px;
+    border-radius: 0 0 6px 6px;
+}
+
+.dpad-left {
+    top: 36px;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px 0 0 6px;
+}
+
+.dpad-right {
+    top: 36px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 0 6px 6px 0;
+}
+
+.dpad-center {
+    top: 36px;
+    left: 36px;
+    width: 38px;
+    height: 38px;
+    background: #1e293b;
+    pointer-events: none;
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Right Controls: A and B Action Buttons */
+.action-cluster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 110px;
+}
+
+.action-tray {
+    transform: rotate(-25deg);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-round {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #059669, #064e3b);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+    transition: all 0.08s;
+}
+
+.btn-round.btn-a {
+    background: linear-gradient(145deg, #10b981, #047857);
+}
+
+.btn-round:active, .btn-round.pressed {
+    transform: translateY(3px) scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    filter: brightness(0.85);
+}
+
+/* Bottom Controls: Select, Start & Speaker */
+.console-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding: 0 1.5rem;
+}
+
+.start-select-tray {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0 auto;
+}
+
+.pill-btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.btn-pill {
+    width: 44px;
+    height: 14px;
+    background: linear-gradient(to bottom, #475569, #1e293b);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    touch-action: none;
+    transform: rotate(-25deg);
+}
+
+.btn-pill:active, .btn-pill.pressed {
+    transform: rotate(-25deg) translateY(2px);
+    background: #0f172a;
+}
+
+.pill-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+}
+
+.speaker-grille {
+    display: grid;
+    grid-template-columns: repeat(3, 5px);
+    gap: 4px;
+}
+
+.speaker-hole {
+    width: 5px;
+    height: 5px;
+    background: #022c22;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Keyboard Hints Footer */
+.key-hints {
+    margin: 1.5rem 0 2rem 0;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.key-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0 0.15rem;
+}
+
+/* Toast Message */
+.status-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #064e3b;
+    border: 1px solid var(--neon-emerald);
+    color: #ffffff;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+.status-toast.error {
+    background: #7f1d1d;
+    border-color: #ef4444;
+}
+
+.status-toast.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
